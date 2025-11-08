@@ -1,0 +1,351 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: PBL_AI活用支援bot_v1
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.2.6@e2665624a156f52160927bceac9e169bd7e5ae6b936ae82575e14c90af390e6e
+    version: null
+kind: app
+version: 0.4.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: 'こんにちは！聞きたいことを選んでください。
+
+      自由記述でも対応可能です。
+
+      ※このbotは、20251029版です。ナレッジを検索し応答することができます。ナレッジ未整備です。'
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      config:
+        inputs_config:
+          enabled: false
+        outputs_config:
+          enabled: true
+          preset_response: 不適切な出力がありました
+      enabled: true
+      type: openai_moderation
+    speech_to_text:
+      enabled: false
+    suggested_questions:
+    - AIに関係するガイドラインについて知りたい
+    - このボットについて知りたい
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: question-classifier
+      id: 1761149393123-source-1761199932690-target
+      source: '1761149393123'
+      sourceHandle: source
+      target: '1761199932690'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1761199932690-1-1761205443606-target
+      source: '1761199932690'
+      sourceHandle: '1'
+      target: '1761205443606'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: answer
+      id: 1761199932690-2-1761208902479-target
+      source: '1761199932690'
+      sourceHandle: '2'
+      target: '1761208902479'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1761204068418-source-1761203993514-target
+      source: '1761204068418'
+      sourceHandle: source
+      target: '1761203993514'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: code
+      id: 1761205443606-source-1761718051969-target
+      source: '1761205443606'
+      sourceHandle: source
+      target: '1761718051969'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1761718051969-source-1761204068418-target
+      source: '1761718051969'
+      sourceHandle: source
+      target: '1761204068418'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 開始
+        type: start
+        variables: []
+      height: 51
+      id: '1761149393123'
+      position:
+        x: 30
+        y: 560
+      positionAbsolute:
+        x: 30
+        y: 560
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        classes:
+        - id: '1'
+          name: ガイドラインについて知りたい場合
+        - id: '2'
+          name: その他の場合
+        instructions: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        query_variable_selector:
+        - '1761149393123'
+        - sys.query
+        selected: false
+        title: 質問分類器
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 169
+      id: '1761199932690'
+      position:
+        x: 332
+        y: 560
+      positionAbsolute:
+        x: 332
+        y: 560
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1761204068418.text#}}'
+        selected: false
+        title: 回答 2
+        type: answer
+        variables: []
+      height: 101
+      id: '1761203993514'
+      position:
+        x: 1446.2192433175544
+        y: 560
+      positionAbsolute:
+        x: 1446.2192433175544
+        y: 560
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1761718051969'
+          - result
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 6e338a67-a7cc-450c-9388-f3ed81d5b651
+          role: system
+          text: '{{#context#}}
+
+            ユーザーに概要・タイトル・URLを提示してください。
+
+
+            回答テンプレート
+
+            概要：
+
+            タイトル：
+
+            URL：'
+        reasoning_format: tagged
+        selected: false
+        title: LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1761204068418'
+      position:
+        x: 1175.3596379218588
+        y: 560
+      positionAbsolute:
+        x: 1175.3596379218588
+        y: 560
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - Udc7MFmo0BBXyYOQmERIj86moal58JtAcZOXiGMHqpcVi44CsLKcGbCxGjYkkvbM
+        metadata_filtering_mode: disabled
+        multiple_retrieval_config:
+          reranking_enable: false
+          reranking_mode: weighted_score
+          top_k: 4
+          weights:
+            keyword_setting:
+              keyword_weight: 0
+            vector_setting:
+              embedding_model_name: text-embedding-3-small
+              embedding_provider_name: langgenius/openai/openai
+              vector_weight: 1
+            weight_type: customized
+        query_variable_selector:
+        - '1761149393123'
+        - sys.query
+        retrieval_mode: multiple
+        selected: false
+        title: 知識検索
+        type: knowledge-retrieval
+      height: 89
+      id: '1761205443606'
+      position:
+        x: 634
+        y: 560
+      positionAbsolute:
+        x: 634
+        y: 560
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: この項目は現在編集中です。
+        selected: false
+        title: 回答 2
+        type: answer
+        variables: []
+      height: 99
+      id: '1761208902479'
+      position:
+        x: 634
+        y: 689
+      positionAbsolute:
+        x: 634
+        y: 689
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "def main(obj: dict) -> dict:\n    return {\"result\": obj[0]['metadata']['child_chunks'][0]['content']}\n"
+        code_language: python3
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: true
+        title: コード実行
+        type: code
+        variables:
+        - value_selector:
+          - '1761205443606'
+          - result
+          value_type: array[object]
+          variable: obj
+      height: 51
+      id: '1761718051969'
+      position:
+        x: 899.0510047591313
+        y: 560
+      positionAbsolute:
+        x: 899.0510047591313
+        y: 560
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: -294.22399595760567
+      y: 43.63979903421523
+      zoom: 0.5576480673999114
+  rag_pipeline_variables: []
