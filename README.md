@@ -1,4 +1,4 @@
-# Dify Chatbot DSL
+# PBL用GitHubリポジトリ Dify Chatbot
 
 このリポジトリは、Difyで作成したチャットボットのDSL(Domain Specific Language)定義ファイルを管理しています。
 
@@ -38,7 +38,7 @@ Docs: ドキュメントの更新
 
 ## タグ
 
-週報を提出するタイミングで、`YYYYMMDD週報提出`という名称の`報告用`タグを作成してください
+週報を提出するタイミングで、`YYYYMMDD-YYYYMMDD 週報提出`という名称の`報告用`タグを作成してください
 
 
 ## 注意事項
