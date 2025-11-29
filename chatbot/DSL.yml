@@ -3,16 +3,16 @@ app:
   icon: 🤖
   icon_background: '#FFEAD5'
   mode: advanced-chat
-  name: PBL_AI活用支援bot_v1
+  name: PBL_AI活用支援bot_v2
   use_icon_as_answer_icon: false
 dependencies:
 - current_identifier: null
   type: marketplace
   value:
-    marketplace_plugin_unique_identifier: langgenius/openai:0.2.6@e2665624a156f52160927bceac9e169bd7e5ae6b936ae82575e14c90af390e6e
+    marketplace_plugin_unique_identifier: langgenius/openai:0.2.7@9031bbf9b37d9f6341a20c78a8bd18d686afd3ff627545496c3557705419d084
     version: null
 kind: app
-version: 0.4.0
+version: 0.5.0
 workflow:
   conversation_variables: []
   environment_variables: []
@@ -45,11 +45,11 @@ workflow:
         - local_file
         - remote_url
       number_limits: 3
-    opening_statement: 'こんにちは！聞きたいことを選んでください。
+    opening_statement: 'こんにちは！知りたいことを選んでください。
 
-      自由記述でも対応可能です。
+      文章で質問しても大丈夫です！
 
-      ※このbotは、20251029版です。ナレッジを検索し応答することができます。ナレッジ未整備です。'
+      ※このbotは、20251112版です。RAG検索機能を停止しています。'
     retriever_resource:
       enabled: true
     sensitive_word_avoidance:
@@ -64,16 +64,387 @@ workflow:
     speech_to_text:
       enabled: false
     suggested_questions:
-    - AIに関係するガイドラインについて知りたい
-    - このボットについて知りたい
+    - AIの導入方法について知りたい
+    - AIをチームで使う方法を知りたい
+    - AIについて教えて欲しい・学びたい
+    - 悩みがある
+    - このbotについて教えて欲しい
     suggested_questions_after_answer:
-      enabled: false
+      enabled: true
     text_to_speech:
       enabled: false
       language: ''
       voice: ''
   graph:
     edges:
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: answer
+      id: 1761199932690-1762935854774-1761208902479-target
+      source: '1761199932690'
+      sourceHandle: '1762935854774'
+      target: '1761208902479'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: question-classifier
+      id: 1761199932690-2-1762938737684-target
+      source: '1761199932690'
+      sourceHandle: '2'
+      target: '1762938737684'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: question-classifier
+      id: 1761199932690-1762935447880-1762938954194-target
+      source: '1761199932690'
+      sourceHandle: '1762935447880'
+      target: '1762938954194'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: question-classifier
+      id: 1761199932690-1762935498194-1762939095833-target
+      source: '1761199932690'
+      sourceHandle: '1762935498194'
+      target: '1762939095833'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: question-classifier
+      id: 1761199932690-1-1762938344712-target
+      source: '1761199932690'
+      sourceHandle: '1'
+      target: '1762938344712'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1761199932690-1762937323570-1762940384697-target
+      source: '1761199932690'
+      sourceHandle: '1762937323570'
+      target: '1762940384697'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1762939095833-1762940501560-17629420163860-target
+      source: '1762939095833'
+      sourceHandle: '1762940501560'
+      target: '17629420163860'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1762938954194-1762939024244-17629420628980-target
+      source: '1762938954194'
+      sourceHandle: '1762939024244'
+      target: '17629420628980'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1762938737684-1762938809086-17629420771320-target
+      source: '1762938737684'
+      sourceHandle: '1762938809086'
+      target: '17629420771320'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1762938344712-1762939956515-17629420861540-target
+      source: '1762938344712'
+      sourceHandle: '1762939956515'
+      target: '17629420861540'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1762938344712-1762938535663-1762942801981-target
+      source: '1762938344712'
+      sourceHandle: '1762938535663'
+      target: '1762942801981'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1762938344712-1-1762942801981-target
+      source: '1762938344712'
+      sourceHandle: '1'
+      target: '1762942801981'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1762938344712-1762938485366-1762942801981-target
+      source: '1762938344712'
+      sourceHandle: '1762938485366'
+      target: '1762942801981'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1762938737684-1-1762942963474-target
+      source: '1762938737684'
+      sourceHandle: '1'
+      target: '1762942963474'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1762938737684-2-1762942963474-target
+      source: '1762938737684'
+      sourceHandle: '2'
+      target: '1762942963474'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1762938737684-1762938881306-1762942963474-target
+      source: '1762938737684'
+      sourceHandle: '1762938881306'
+      target: '1762942963474'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1762938737684-1762938799285-1762942963474-target
+      source: '1762938737684'
+      sourceHandle: '1762938799285'
+      target: '1762942963474'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1762938954194-1-1762943115966-target
+      source: '1762938954194'
+      sourceHandle: '1'
+      target: '1762943115966'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1762938954194-2-1762943115966-target
+      source: '1762938954194'
+      sourceHandle: '2'
+      target: '1762943115966'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1762938954194-1762942464105-1762943115966-target
+      source: '1762938954194'
+      sourceHandle: '1762942464105'
+      target: '1762943115966'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1762939095833-1-1762943299533-target
+      source: '1762939095833'
+      sourceHandle: '1'
+      target: '1762943299533'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1762939095833-2-1762943299533-target
+      source: '1762939095833'
+      sourceHandle: '2'
+      target: '1762943299533'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1762939095833-1762940482238-1762943299533-target
+      source: '1762939095833'
+      sourceHandle: '1762940482238'
+      target: '1762943299533'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1762942801981-source-1762943436485-target
+      source: '1762942801981'
+      sourceHandle: source
+      target: '1762943436485'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 17629420861540-source-1762943475761-target
+      source: '17629420861540'
+      sourceHandle: source
+      target: '1762943475761'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1762942963474-source-1762943478314-target
+      source: '1762942963474'
+      sourceHandle: source
+      target: '1762943478314'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 17629420771320-source-1762943480714-target
+      source: '17629420771320'
+      sourceHandle: source
+      target: '1762943480714'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1762943115966-source-1762943483048-target
+      source: '1762943115966'
+      sourceHandle: source
+      target: '1762943483048'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 17629420628980-source-1762943499519-target
+      source: '17629420628980'
+      sourceHandle: source
+      target: '1762943499519'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1762943299533-source-1762943501852-target
+      source: '1762943299533'
+      sourceHandle: source
+      target: '1762943501852'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 17629420163860-source-1762943504369-target
+      source: '17629420163860'
+      sourceHandle: source
+      target: '1762943504369'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1762940384697-source-1762943511821-target
+      source: '1762940384697'
+      sourceHandle: source
+      target: '1762943511821'
+      targetHandle: target
+      type: custom
+      zIndex: 0
     - data:
         isInLoop: false
         sourceType: start
@@ -88,57 +459,11 @@ workflow:
     - data:
         isInLoop: false
         sourceType: question-classifier
-        targetType: knowledge-retrieval
-      id: 1761199932690-1-1761205443606-target
-      source: '1761199932690'
-      sourceHandle: '1'
-      target: '1761205443606'
-      targetHandle: target
-      type: custom
-      zIndex: 0
-    - data:
-        isInLoop: false
-        sourceType: question-classifier
-        targetType: answer
-      id: 1761199932690-2-1761208902479-target
-      source: '1761199932690'
-      sourceHandle: '2'
-      target: '1761208902479'
-      targetHandle: target
-      type: custom
-      zIndex: 0
-    - data:
-        isInLoop: false
-        sourceType: llm
-        targetType: answer
-      id: 1761204068418-source-1761203993514-target
-      source: '1761204068418'
-      sourceHandle: source
-      target: '1761203993514'
-      targetHandle: target
-      type: custom
-      zIndex: 0
-    - data:
-        isInIteration: false
-        isInLoop: false
-        sourceType: knowledge-retrieval
-        targetType: code
-      id: 1761205443606-source-1761718051969-target
-      source: '1761205443606'
-      sourceHandle: source
-      target: '1761718051969'
-      targetHandle: target
-      type: custom
-      zIndex: 0
-    - data:
-        isInIteration: false
-        isInLoop: false
-        sourceType: code
         targetType: llm
-      id: 1761718051969-source-1761204068418-target
-      source: '1761718051969'
-      sourceHandle: source
-      target: '1761204068418'
+      id: 1762939095833-1762951672197-1762943299533-target
+      source: '1762939095833'
+      sourceHandle: '1762951672197'
+      target: '1762943299533'
       targetHandle: target
       type: custom
       zIndex: 0
@@ -148,14 +473,14 @@ workflow:
         title: 開始
         type: start
         variables: []
-      height: 51
+      height: 72
       id: '1761149393123'
       position:
-        x: 30
-        y: 560
+        x: 1050.7418828163893
+        y: 638
       positionAbsolute:
-        x: 30
-        y: 560
+        x: 1050.7418828163893
+        y: 638
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -164,9 +489,80 @@ workflow:
     - data:
         classes:
         - id: '1'
-          name: ガイドラインについて知りたい場合
+          name: 生成AIの導入
         - id: '2'
-          name: その他の場合
+          name: 生成AIの基礎知識
+        - id: '1762935447880'
+          name: 生成AIの利用・施策検討
+        - id: '1762935498194'
+          name: トラブル・不安・相談
+        - id: '1762935854774'
+          name: このbotについて
+        - id: '1762937323570'
+          name: その他
+        instructions: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        query_variable_selector:
+        - sys
+        - query
+        selected: true
+        title: 質問分類器
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 321
+      id: '1761199932690'
+      position:
+        x: 1326
+        y: 638
+      positionAbsolute:
+        x: 1326
+        y: 638
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: 'コンセプト：迷っている時間を減らし、“やってみよう”に変える社内パートナー
+
+          主な利用者：開発会社のマネージャー、リーダー層
+
+          想定状況：AI導入を任されたけど、何から始めれば良いか分からない
+
+          ゴール：ユーザーが自分の組織や業務に合ったAI活用施策を“自信を持って計画・実行”できる状態に導く'
+        selected: false
+        title: 回答 2
+        type: answer
+        variables: []
+      height: 211
+      id: '1761208902479'
+      position:
+        x: 1688
+        y: 1288.5714285714287
+      positionAbsolute:
+        x: 1688
+        y: 1288.5714285714287
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        classes:
+        - id: '1762938535663'
+          name: ツール選定
+        - id: '1'
+          name: 導入手順
+        - id: '1762938485366'
+          name: 業務分析
+        - id: '1762939956515'
+          name: その他
         instructions: ''
         model:
           completion_params:
@@ -178,37 +574,431 @@ workflow:
         - '1761149393123'
         - sys.query
         selected: false
-        title: 質問分類器
+        title: 質問分類器 2
         type: question-classifier
         vision:
           enabled: false
-      height: 169
-      id: '1761199932690'
+      height: 245
+      id: '1762938344712'
       position:
-        x: 332
-        y: 560
+        x: 1679.4285714285716
+        y: -151.14285714285728
       positionAbsolute:
-        x: 332
-        y: 560
+        x: 1679.4285714285716
+        y: -151.14285714285728
       selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 242
     - data:
-        answer: '{{#1761204068418.text#}}'
+        classes:
+        - id: '1'
+          name: 生成AIとは
+        - id: '2'
+          name: プロンプト
+        - id: '1762938881306'
+          name: セキュリティ
+        - id: '1762938799285'
+          name: 教材を知りたい
+        - id: '1762938809086'
+          name: その他
+        instructions: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        query_variable_selector:
+        - '1761149393123'
+        - sys.query
         selected: false
-        title: 回答 2
-        type: answer
-        variables: []
-      height: 101
-      id: '1761203993514'
+        title: 質問分類器 3
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 283
+      id: '1762938737684'
       position:
-        x: 1446.2192433175544
-        y: 560
+        x: 1688
+        y: 308
       positionAbsolute:
-        x: 1446.2192433175544
-        y: 560
+        x: 1688
+        y: 308
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        classes:
+        - id: '1'
+          name: 指標・効果検証
+        - id: '2'
+          name: 勉強会・ハンズオン
+        - id: '1762942464105'
+          name: 成功事例・失敗事例
+        - id: '1762939024244'
+          name: その他
+        instructions: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        query_variable_selector:
+        - '1761149393123'
+        - sys.query
+        selected: false
+        title: 質問分類器 4
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 245
+      id: '1762938954194'
+      position:
+        x: 1688
+        y: 672
+      positionAbsolute:
+        x: 1688
+        y: 672
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        classes:
+        - id: '1'
+          name: ハルシネーション
+        - id: '2'
+          name: 情報漏洩
+        - id: '1762940482238'
+          name: 生成AIに対する抵抗感・嫌悪感
+        - id: '1762951672197'
+          name: AIに頼ることで、技術力が低下する
+        - id: '1762940501560'
+          name: その他
+        instruction: ''
+        instructions: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        query_variable_selector:
+        - '1761149393123'
+        - sys.query
+        selected: false
+        title: 質問分類器 5
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 283
+      id: '1762939095833'
+      position:
+        x: 1688
+        y: 960
+      positionAbsolute:
+        x: 1688
+        y: 960
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 3
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: a93ad6e9-64e1-4f54-b0c0-541d7821273c
+          role: system
+          text: 'あなたは丁寧なヒアリングを行うアシスタントです。
+
+            ユーザーの質問にすぐ答えるのではなく、まず「なぜその質問をしているのか」「何を知りたいのか」「どんな状況で困っているのか」を理解するよう努めてください。
+
+
+            以下のルールで会話してください：
+
+            1. 最初の返答では、質問の背景・目的・文脈を丁寧に引き出す。
+
+            2. 「どんな場面で使いたいですか？」「どの部分が一番気になっていますか？」など、深掘りの質問を1〜2個添える。
+
+            3. ユーザーが目的を明確にした後に、具体的な情報や提案を提示する。
+
+            4. 質問が曖昧な場合でも、「おそらく〜について知りたいということでしょうか？」と仮説を立てて確認する。
+
+            5. 専門用語は避け、理解しやすく要約して返す。
+
+
+            目的：ユーザー自身が「自分が何を知りたかったのか」を明確にできるよう支援すること。
+
+            '
+        selected: false
+        title: ヒアリング
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1762940384697'
+      position:
+        x: 1679.4285714285716
+        y: 1586.6861821799785
+      positionAbsolute:
+        x: 1679.4285714285716
+        y: 1586.6861821799785
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 3
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: a93ad6e9-64e1-4f54-b0c0-541d7821273c
+          role: system
+          text: "あなたは、ユーザーが生成AIに対して抱いている不安や違和感を、\n安心して言葉にできるよう支援するアシスタントです。\n\n###\
+            \ 目的\nユーザーが、自分でも整理しづらいAIへの不安・抵抗・戸惑いを\n丁寧に言語化し、背景にある考え方や価値観を理解できるようにする。\n\
+            \n### あなたの役割\n- 評価や説得をせず、ただ受け取り、整理を手伝う。\n- ユーザーの発言の中にある感情・理由・価値観を聞き出す。\n\
+            - ときに要約して「つまり、〜と感じているのですね」と返す。\n- 必要があれば、公的情報や一般的な見解をそっと添え、安心材料を示す。\n\
+            - 結論を出すことよりも、考えを可視化し、納得できる理解を深めることを優先する。\n\n### 会話方針\n1. 最初の応答では、静かな問いかけで始める：\n\
+            \   - 「どんな場面で不安を感じますか？」\n   - 「“怖い”と感じるのは、どんなときですか？」\n   - 「不安の中に、少しでも期待や好奇心はありますか？」\n\
+            2. ユーザーの答えを受け止め、内容を短く整理しながら共感的に返す。\n3. 感情の奥にある「なぜ」「どんな背景があるか」を掘り下げる問いを一つ添える。\n\
+            4. 話が落ち着いたら、「いま少し整理すると、どんな不安が残っていますか？」とまとめに導く。\n5. 導く際は、アドバイスや評価ではなく、「考えの地図を描くように」サポートする。\n\
+            \n### トーン\n- 穏やかで安全な雰囲気。\n- 判断せず、短く静かな文体で。\n- 専門家ではなく、話を聞いてくれる相手のように振る舞う。\n\
+            \n### 目的\nユーザーが「自分はなぜ不安なのか」「どの部分が心に引っかかっているのか」を\n自覚できるようになること。\n\n"
+        selected: false
+        title: ヒアリング
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '17629420163860'
+      position:
+        x: 1998.405199293432
+        y: 1160.1300079539783
+      positionAbsolute:
+        x: 1998.405199293432
+        y: 1160.1300079539783
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 3
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: a93ad6e9-64e1-4f54-b0c0-541d7821273c
+          role: system
+          text: "あなたは、組織でAIを活用しようとする担当者の思考を整理するアシスタントです。\n\nユーザーは、「AIをどう活かせばいいかわからない」「方針をまとめたい」と考えています。\n\
+            あなたは答えを与えるのではなく、問いを通して整理を助けてください。\n\n### あなたの役割\n- ユーザーの言葉を丁寧に受け取り、意図や背景を確認しながら整理を手伝う。\n\
+            - 「なぜそう感じたのか」「何を優先したいのか」といった内側の思考を可視化する。\n- ユーザーが自ら答えを導けるように支援する。\n\n\
+            ### 会話スタイル\n1. 最初の応答では、状況を整理するために次の観点から1〜2問を選び、質問する：\n   - どんな場面・部署でAI活用を考えているか\n\
+            \   - どんな変化を起こしたいか\n   - いま感じている課題や不安は何か\n2. ユーザーの発言を「要約＋再確認」して返す。\n \
+            \  例：「つまり、今は“使う目的を明確にしたい”という段階ですね。」のように。\n3. 情報提供を行うときは、短く整理し、思考の補助として提示する。\n\
+            \   （例：「一般的にはこう整理されています」など）\n4. 最後は常に「ここまでで整理できたこと」「次に考えたいこと」を一緒に確認する。\n\
+            \n### トーン\n- 穏やかで誠実。上から教えるのではなく、対話で寄り添う。\n- 曖昧さを急いで解消せず、考えが熟す時間を尊重する。\n\
+            - シンプルな言葉で、構造的に話す。\n\n### 目的\nユーザーが自分の組織に合ったAI活用の方向性を、納得感をもって整理・言語化できるようにする。\n"
+        selected: false
+        title: ヒアリング (1)
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '17629420628980'
+      position:
+        x: 1998.405199293432
+        y: 812.6234323662281
+      positionAbsolute:
+        x: 1998.405199293432
+        y: 812.6234323662281
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 3
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: a93ad6e9-64e1-4f54-b0c0-541d7821273c
+          role: system
+          text: 'あなたは、企業や組織でAI導入を検討している人のために、
+
+            AIの基礎知識をわかりやすく案内するアシスタントです。
+
+
+            ### 目的
+
+            ユーザーが、AIの基本概念や用語、仕組みを理解し、
+
+            自社のAI導入に向けた判断材料を得られるように支援します。
+
+
+            ### 回答方針
+
+            1. 難しい専門用語を使わず、日常の例えを交えて説明する。
+
+            2. 各回答は「短い概要 → 少し詳しい説明 → 実務での活用例」という順にまとめる。
+
+            3. AIを過剰に賛美せず、限界や注意点も客観的に伝える。
+
+            4. 常に、「組織でどう活かせるか」という視点を添える。
+
+            5. ユーザーが自分でも調べるように推奨する。
+
+
+            ### 回答トーン
+
+            - 丁寧で落ち着いた口調。
+
+            - 教えるというより「一緒に整理する」姿勢。
+
+            - 政府・公的機関の中立的な立場に近い説明。
+
+
+            目的：ユーザーが「AIとは何か」を理解し、安心して導入検討を進められるように支援する。
+
+            '
+        selected: false
+        title: ヒアリング (2)
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '17629420771320'
+      position:
+        x: 2019.9209844470647
+        y: 500.0014070259367
+      positionAbsolute:
+        x: 2019.9209844470647
+        y: 500.0014070259367
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 3
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: a93ad6e9-64e1-4f54-b0c0-541d7821273c
+          role: system
+          text: "あなたは、企業や組織で生成AI導入を検討している担当者を支援するAIアシスタントです。\n\nユーザーが質問した内容をすぐに答えるのではなく、\n\
+            まず「どんな状況・目的で生成AIを導入したいのか」を理解するためのヒアリングを行ってください。\n\n### 会話ルール\n\n1. 最初の返答では、以下の観点から背景を丁寧に引き出す：\n\
+            \   - 導入の目的（業務効率化・教育・新規事業など）\n   - 組織の現状（AI活用経験・ITリテラシー・セキュリティ方針）\n  \
+            \ - 困っている点や課題感（例：「社内で理解が得られない」「知識が足りない」など）\n2. 「どんな業務でAIを使いたいですか？」「導入のきっかけは何ですか？」など、\n\
+            \   背景を掘り下げる質問を1〜2つ添える。\n3. ユーザーの目的が明確になったら、\n   - 公的機関（経産省・総務省・IPAなど）の資料や指針をもとに\n\
+            \     適切な情報を案内・要約する。\n4. 専門用語を使う際は、必ずわかりやすい説明を添える。\n5. 決して断定的な判断を下さず、\n\
+            \   「このような方向性もあります」「一般的には〜が推奨されています」と\n   選択肢を示す形で返す。\n\n目的：ユーザー自身が、自社やチームに合ったAI導入方針を考えられるよう支援する。\n"
+        selected: false
+        title: ヒアリング (3)
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '17629420861540'
+      position:
+        x: 2033.2684893540468
+        y: 124.7882135296606
+      positionAbsolute:
+        x: 2033.2684893540468
+        y: 124.7882135296606
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -218,8 +1008,19 @@ workflow:
         context:
           enabled: true
           variable_selector:
-          - '1761718051969'
-          - result
+          - '1762938344712'
+          - class_name
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
         model:
           completion_params:
             temperature: 0.7
@@ -227,125 +1028,394 @@ workflow:
           name: gpt-3.5-turbo
           provider: langgenius/openai/openai
         prompt_template:
-        - id: 6e338a67-a7cc-450c-9388-f3ed81d5b651
+        - id: ece29b1b-1774-48de-898e-c9d9526911d8
           role: system
-          text: '{{#context#}}
-
-            ユーザーに概要・タイトル・URLを提示してください。
-
-
-            回答テンプレート
-
-            概要：
-
-            タイトル：
-
-            URL：'
-        reasoning_format: tagged
+          text: "あなたは、企業や組織のAI導入を支援するアドバイザーです。  \nユーザーは、社内でAI活用を検討している担当者・管理職・推進者です。\n\
+            {{#1762938344712.class_name#}}について知りたいと考えています。\n\n目的は、ユーザーが自組織の状況に合わせて、\n\
+            無理なく効果的にAI導入を進められるよう支援することです。\n\n---\n\n### 【あなたの役割】\n1. **現状を把握する伴走者**\n\
+            \   - まず、ユーザーの業種・業務内容・導入目的・課題を聞き取り、背景を理解する。\n   - 「なぜAIを導入したいのか」「いまどの段階か（構想・検証・運用）」を確認する。\n\
+            2. **方針を整理する助言者**\n   - 導入の狙い、期待する効果、リスク、体制などを整理するための問いを投げかける。\n   - 思考を構造的にまとめ、方向性を明確にする手伝いをする。\n\
+            3. **根拠ある情報提供者**\n   - 経産省、総務省、IPA、デジタル庁など公的資料を基にした内容で助言する。\n   - 信頼できる情報源を紹介・要約する。\n\
+            4. **実行支援のナビゲーター**\n   - 準備・導入・運用・教育・評価までのプロセスを整理して案内する。\n   - 小さく試して検証するステップを推奨する。\n\
+            \n---\n\n### 【回答方針】\n- 会話の最初では、状況を把握するための質問を1〜2個行う。\n- 回答は「①背景整理 → ②考慮すべき点\
+            \ → ③次のアクション」の3段階で提示する。\n- 技術的な言葉を避け、ビジネス文脈に合わせて説明する。\n- 効果やリスクを両面から伝える。\n\
+            - 判断を押しつけず、複数の選択肢を提示する。\n- 公的資料や事例を引用する際は、出典を簡潔に示す（例：総務省「情報通信白書（2024）」など）。\n\
+            \n---\n\n### 【対話スタイル】\n- 落ち着いた敬語で、専門家として誠実に話す。\n- 一方的に解説せず、ユーザーと一緒に考える姿勢を保つ。\n\
+            - 質問や迷いを歓迎し、「今どの段階にいるか」を一緒に確認する。\n- 現場の制約（時間・人員・知識不足）に共感する。\n\n---\n\n\
+            ### 【会話開始時の質問例】\n- 「AIを導入したいと思われたきっかけは何ですか？」\n- 「どの業務でAIを使いたいとお考えですか？」\n\
+            - 「いま導入のどの段階にありますか？（検討中／試行中／運用中など）」\n- 「社内ではAI活用に対して、どんな声が上がっていますか？」\n\
+            \n---\n\n### 【目的】\nユーザーが、  \n- 自組織のAI導入の目的と方向性を明確にし、  \n- 関係者と共有できる計画を立て、\
+            \  \n- 安全で効果的な活用へ進めるようになること。\n"
         selected: false
-        title: LLM
+        title: LLM 6
         type: llm
         vision:
           enabled: false
       height: 87
-      id: '1761204068418'
+      id: '1762942801981'
       position:
-        x: 1175.3596379218588
-        y: 560
+        x: 2054.031274764908
+        y: -135.2894287728219
       positionAbsolute:
-        x: 1175.3596379218588
-        y: 560
+        x: 2054.031274764908
+        y: -135.2894287728219
       selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 242
     - data:
-        dataset_ids:
-        - Udc7MFmo0BBXyYOQmERIj86moal58JtAcZOXiGMHqpcVi44CsLKcGbCxGjYkkvbM
-        metadata_filtering_mode: disabled
-        multiple_retrieval_config:
-          reranking_enable: false
-          reranking_mode: weighted_score
-          top_k: 4
-          weights:
-            keyword_setting:
-              keyword_weight: 0
-            vector_setting:
-              embedding_model_name: text-embedding-3-small
-              embedding_provider_name: langgenius/openai/openai
-              vector_weight: 1
-            weight_type: customized
-        query_variable_selector:
-        - '1761149393123'
-        - sys.query
-        retrieval_mode: multiple
+        context:
+          enabled: true
+          variable_selector:
+          - '1762938737684'
+          - class_name
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 94849b68-6734-4305-87a3-1960bbb4d32f
+          role: system
+          text: "あなたは、AIの基礎知識を学びたい社会人のためのコーチです。  \n目的は、ユーザーが{{#1762938737684.class_name#}}を自分の言葉で理解し、実務に活かせるようになることです。\n\
+            \n---\n\n### 【あなたの役割】\n1. 教えるのではなく、ユーザーの理解を引き出す。\n   - 「どう理解しているか」「どこでつまずいているか」を確認する。\n\
+            \   - 一方的な講義ではなく、対話を通じて理解を整理する。\n2. 難しい言葉を避け、身近な例で説明する。\n   - 例：「AIは“経験から学ぶプログラム”のようなものです」など。\n\
+            3. ユーザーの目的（業務で使いたい・興味を持ったなど）に合わせて、説明の深さを調整する。\n4. 質問のたびに、「どのレベルの理解を目指すか（ざっくり理解／実務で使う）」を確認しながら進める。\n\
+            5. 公的な定義や信頼できる資料（総務省・経産省・IPA等）に基づく内容で説明する。\n\n---\n\n### 【会話方針】\n- 会話の最初に、「AIについてどの程度知っているか」「何を知りたいか」を確認する。\n\
+            - 回答は「①短い概要 → ②少し詳しい説明 → ③身近な例や活用場面」という構成で返す。\n- 不明点を尋ねられたら、「どう理解していますか？」と逆質問で思考を整理してもらう。\n\
+            - 分からなかったときは責めず、「いい質問ですね」と肯定的に扱う。\n- ときどき「ここまででどこが気になりましたか？」と理解をチェックする。\n\
+            \n---\n\n### 【トーン】\n- 穏やかで親しみやすく、学びのペースに合わせる。\n- 教師のように一方的ではなく、伴走する姿勢。\n\
+            - 正確さを保ちつつ、用語よりも意味を重視する。\n\n---\n\n### 【扱う主なトピック】\n- AIとは何か（人工知能・機械学習・生成AIの違い）\n\
+            - 学習の仕組み（データ・モデル・アルゴリズム）\n- 生成AIの特徴（LLM・画像生成・限界）\n- 利用時の注意点（著作権・情報管理・倫理）\n\
+            - AI導入の考え方（目的設定・ルール整備・教育）\n\n---\n\n### 【会話開始例】\n- 「AIって何ですか？」→ 概念＋比喩で解説し、確認質問を返す。\
+            \  \n- 「AIの仕組みをざっくり知りたい」→ “経験から学ぶ”のイメージで説明。  \n- 「生成AIと普通のAIの違いは？」→ “分析するAI”と“生み出すAI”で対比。\
+            \  \n\n---\n"
         selected: false
-        title: 知識検索
-        type: knowledge-retrieval
-      height: 89
-      id: '1761205443606'
+        title: LLM 7
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1762942963474'
       position:
-        x: 634
-        y: 560
+        x: 2013.9887600439615
+        y: 314.076569762244
       positionAbsolute:
-        x: 634
-        y: 560
+        x: 2013.9887600439615
+        y: 314.076569762244
       selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 242
     - data:
-        answer: この項目は現在編集中です。
+        context:
+          enabled: true
+          variable_selector:
+          - '1762938954194'
+          - class_name
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        prompt_template:
+        - role: system
+          text: "あなたは、チームや組織でAIを効果的に活用するためのコンサルタントです。\n\nユーザーは、チームのリーダー・管理職・AI推進担当者など、\n\
+            「個人ではなく、チームでAIを使いたい」と考えている立場の人です。\n{{#1762938954194.class_name#}}について知りたがっています。\n\
+            \n---\n\n### 【あなたの目的】\n- チーム全体でAIを活用できるように、導入目的・活用方針・体制を整理する支援をする。\n-\
+            \ メンバー間の温度差やスキル差、業務特性を踏まえて現実的な施策を提案する。\n- AI活用を「個人技」から「チームの仕組み」に変える道筋を示す。\n\
+            \n---\n\n### 【あなたの役割】\n1. **聞き役・整理役**\n   - チームの現状や課題を丁寧に聞き出し、構造的に整理する。\n\
+            \   - 「目的」「現状」「障害」「必要なサポート」に分けて考えやすくする。\n\n2. **導入設計アドバイザー**\n   - 活用目的や対象業務を明確化し、スモールスタートの提案を行う。\n\
+            \   - チーム文化・リテラシーに合わせた導入ステップを提案する。\n\n3. **変化促進ファシリテーター**\n   - メンバーが自発的に関わりたくなる方法（共有・教育・称賛など）を助言する。\n\
+            \   - 抵抗感や不安への対応策を共に考える。\n\n4. **中立的な専門家**\n   - 公的資料（経産省、総務省、IPA、デジタル庁など）に基づく情報を提示する。\n\
+            \   - 具体的なツール名よりも「考え方」や「プロセス設計」を重視する。\n\n---\n\n### 【会話方針】\n- 最初の応答では、以下の観点から1〜2問を選び、ヒアリングする：\n\
+            \  - チームの目的・業務内容\n  - AI活用の現状（誰が、どの程度使っているか）\n  - 直面している課題（例：使い方が定まらない／反対意見がある／効果が見えない）\n\
+            - 回答は「①現状整理 → ②考慮すべき視点 → ③次の一歩」の3段階でまとめる。\n- 問題に対しては複数の選択肢（導入・教育・共有など）を提示し、ユーザーに選ばせる。\n\
+            - 会話の最後に「ここまでで整理できたこと」「次に試せそうなこと」を一緒に確認する。\n\n---\n\n### 【トーン】\n- 落ち着いた専門家の口調。論理的でありながら、柔らかい。\n\
+            - 教えるのではなく、共に戦略を練る姿勢。\n- 現場の制約（忙しさ・抵抗感・知識不足）に共感し、実行可能な助言をする。\n\n---\n\n\
+            ### 【会話開始例】\n- 「チームでAIを使いたいとのことですが、今どんな場面で必要性を感じていますか？」\n- 「メンバーの中で、すでにAIを試している方はいらっしゃいますか？」\n\
+            - 「導入を進めるうえで、一番の壁はどこにありそうですか？」\n\n---\n\n### 【提案の枠組み（参考）】\n- **①目的定義**：チームとして何を改善・強化したいのか\
+            \  \n- **②スキル共有**：メンバーのAIリテラシーを均す取り組み  \n- **③ルール整備**：安全な使い方・情報管理ルール \
+            \ \n- **④仕組み化**：ナレッジ共有やAI活用事例の定着  \n- **⑤評価と改善**：効果を可視化し、改善点を検討\n\n---\n\
+            \n### 【目的】\nユーザーが、自チームに合ったAI活用の方向性・仕組み・教育方針を明確にし、  \nチームメンバー全員が納得感を持ってAIを使える環境を整えられるようにする。\n"
+        selected: false
+        title: LLM 8
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1762943115966'
+      position:
+        x: 1989.3951457869657
+        y: 658.8100980813696
+      positionAbsolute:
+        x: 1989.3951457869657
+        y: 658.8100980813696
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1762939095833'
+          - class_name
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        prompt_template:
+        - role: system
+          text: "あなたは、生成AIの利用に関するトラブルを解決へ導くアドバイザーです。\n\nユーザーは、AIツールや生成AIを業務・研究・学習などで活用しており、\n\
+            {{#1762939095833.class_name#}}に関する問題を抱えています。\n\n---\n\n### 【あなたの目的】\n\
+            - ユーザーのトラブルの内容を整理し、原因を構造的に分析する。\n- 技術・運用・倫理・体制など、複数の観点から対処案を提示する。\n- 必要に応じて、公的機関（総務省・経産省・IPA・個人情報保護委員会など）の指針を参照し、安全面の助言も行う。\n\
+            - 感情的な混乱や不安にも落ち着いて対応し、冷静に整理を促す。\n\n---\n\n### 【あなたの役割】\n1. **ヒアリングと分類**\n\
+            \   - まず「どんな場面で」「何をして」「どんな問題が起きたのか」を確認する。\n   - 問題を以下の観点で分類する：\n     -\
+            \ 技術面（動作・出力・設定の問題）\n     - 運用面（使い方・ルール・社内理解の問題）\n     - 倫理・リスク面（著作権・情報漏えい・誤情報など）\n\
+            2. **状況整理**\n   - ユーザーの説明を要約して再確認し、「現象」「影響」「原因の仮説」を明確にする。\n3. **対処と再発防止**\n\
+            \   - 根拠に基づいた対処案を複数提示する。\n   - 同じ問題を防ぐための設定・運用・教育の観点も添える。\n4. **必要に応じた参照情報提供**\n\
+            \   - 信頼できる公的資料を紹介する（例：IPA「生成AI利用における注意喚起」など）。\n\n---\n\n### 【会話方針】\n\
+            - 最初の応答では、状況を把握するために1〜2問質問する：\n  - 「どんなツールや場面で起きたトラブルでしょうか？」\n  - 「期待していた結果と、実際の結果はどのように違いましたか？」\n\
+            \  - 「その問題は、技術的なエラーでしょうか？それとも運用や人の面での問題に近いですか？」\n- 回答は「①現象の整理 → ②考えられる原因\
+            \ → ③対処案 → ④再発防止の視点」で構成する。\n- 難しい言葉を避け、冷静で安心感のある口調にする。\n- “誰が悪いか”ではなく、“何が起きているか”に焦点を置く。\n\
+            \n---\n\n### 【トーン】\n- 冷静で理性的、かつユーザーを落ち着かせる姿勢。\n- 専門家として誠実に対応し、曖昧なことは「現時点では〜が考えられます」と限定して述べる。\n\
+            - 責めず、整理してから次の一歩を提案する。\n\n---\n\n### 【会話開始例】\n- 「どんな状況で問題が起きたか、少し教えていただけますか？」\
+            \  \n- 「出力が想定と違ったということですね。どんな点が特に気になりましたか？」  \n- 「運用ルールやチーム体制の中で、困っている部分はありますか？」\
+            \  \n\n---\n\n### 【想定される主なトラブル領域】\n- 出力の誤りや偏り（AIの幻覚・不正確な回答）\n- セキュリティや個人情報の懸念\n\
+            - 社内ガイドラインとの不一致\n- プロンプトの書き方に関する問題\n- チームでの利用ポリシーが不明確\n- 教育・リテラシー不足による誤用\n\
+            \n---\n\n### 【目的】\nユーザーが、問題の原因と対応策を冷静に把握し、  \n再発を防ぐための知識と安心感を得られるよう支援する。\n"
+        selected: false
+        title: LLM 9
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1762943299533'
+      position:
+        x: 1984.2181940643209
+        y: 951.3708841983537
+      positionAbsolute:
+        x: 1984.2181940643209
+        y: 951.3708841983537
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1762942801981.text#}}'
         selected: false
         title: 回答 2
         type: answer
         variables: []
-      height: 99
-      id: '1761208902479'
+      height: 101
+      id: '1762943436485'
       position:
-        x: 634
-        y: 689
+        x: 2356.031274764908
+        y: -135.2894287728219
       positionAbsolute:
-        x: 634
-        y: 689
+        x: 2356.031274764908
+        y: -135.2894287728219
       selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 242
     - data:
-        code: "def main(obj: dict) -> dict:\n    return {\"result\": obj[0]['metadata']['child_chunks'][0]['content']}\n"
-        code_language: python3
-        outputs:
-          result:
-            children: null
-            type: string
-        selected: true
-        title: コード実行
-        type: code
-        variables:
-        - value_selector:
-          - '1761205443606'
-          - result
-          value_type: array[object]
-          variable: obj
-      height: 51
-      id: '1761718051969'
+        answer: '{{#17629420861540.text#}}'
+        selected: false
+        title: 回答 3
+        type: answer
+        variables: []
+      height: 101
+      id: '1762943475761'
       position:
-        x: 899.0510047591313
-        y: 560
+        x: 2335.268489354047
+        y: 124.7882135296606
       positionAbsolute:
-        x: 899.0510047591313
-        y: 560
-      selected: true
+        x: 2335.268489354047
+        y: 124.7882135296606
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1762942963474.text#}}'
+        selected: false
+        title: 回答 4
+        type: answer
+        variables: []
+      height: 101
+      id: '1762943478314'
+      position:
+        x: 2315.9887600439615
+        y: 314.076569762244
+      positionAbsolute:
+        x: 2315.9887600439615
+        y: 314.076569762244
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#17629420771320.text#}}'
+        selected: false
+        title: 回答 5
+        type: answer
+        variables: []
+      height: 101
+      id: '1762943480714'
+      position:
+        x: 2321.9209844470647
+        y: 500.0014070259367
+      positionAbsolute:
+        x: 2321.9209844470647
+        y: 500.0014070259367
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1762943115966.text#}}'
+        selected: false
+        title: 回答 6
+        type: answer
+        variables: []
+      height: 101
+      id: '1762943483048'
+      position:
+        x: 2291.3951457869657
+        y: 658.8100980813696
+      positionAbsolute:
+        x: 2291.3951457869657
+        y: 658.8100980813696
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#17629420628980.text#}}'
+        selected: false
+        title: 回答 7
+        type: answer
+        variables: []
+      height: 101
+      id: '1762943499519'
+      position:
+        x: 2300.405199293432
+        y: 812.6234323662281
+      positionAbsolute:
+        x: 2300.405199293432
+        y: 812.6234323662281
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1762943299533.text#}}'
+        selected: false
+        title: 回答 8
+        type: answer
+        variables: []
+      height: 101
+      id: '1762943501852'
+      position:
+        x: 2286.218194064321
+        y: 951.3708841983537
+      positionAbsolute:
+        x: 2286.218194064321
+        y: 951.3708841983537
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#17629420163860.text#}}'
+        selected: false
+        title: 回答 9
+        type: answer
+        variables: []
+      height: 101
+      id: '1762943504369'
+      position:
+        x: 2300.405199293432
+        y: 1160.1300079539783
+      positionAbsolute:
+        x: 2300.405199293432
+        y: 1160.1300079539783
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1762940384697.text#}}'
+        selected: false
+        title: 回答 10
+        type: answer
+        variables: []
+      height: 101
+      id: '1762943511821'
+      position:
+        x: 1981.4285714285716
+        y: 1586.6861821799785
+      positionAbsolute:
+        x: 1981.4285714285716
+        y: 1586.6861821799785
+      selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 242
     viewport:
-      x: -294.22399595760567
-      y: 43.63979903421523
-      zoom: 0.5576480673999114
+      x: -154.70762634224047
+      y: 27.159720540942544
+      zoom: 0.36894352302731837
   rag_pipeline_variables: []
